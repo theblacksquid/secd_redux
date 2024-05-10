@@ -28,8 +28,19 @@ struct SECD_Cell
 	int           signed_int;
 	float         float_value;
 	unsigned char character;
-	SECD_Pair*    pair_value;
-	SECD_Array*   array_value;
+	
+        struct SECD_Pair
+	{
+	    SECD_Cell* head;
+	    SECD_Cell* rest;
+	} pair_value;
+	
+	struct SECD_Array
+	{
+	    SECD_Cell* start;
+	    unsigned int size;
+	} array_value;
+	
 	enum SECD_Instruction
 	{
 	    NIL,

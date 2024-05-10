@@ -1,42 +1,45 @@
 
 #include "secd_cell.h"
 #include "secd_pair.h"
+#include "secd_machine.h"
 
-SECD_Cell pair_head(SECD_Pair* pair)
+SECD_Cell pair_head(SECD_Cell* pair)
 {
-    return *pair->head;
+    return *pair->data.pair_value.head;
 }
 
-SECD_Cell* pair_rest(SECD_Pair* pair)
+SECD_Cell* pair_rest(SECD_Cell* pair)
 {
-    return pair->rest;
+    return pair->data.pair_value.rest;
 }
 
-unsigned int pair_count(SECD_Pair* pair)
+SECD_Cell* pair_cons(SECD_Cell* pair, SECD_Cell* value, SECD_Machine* context)
+{
+    SECD_Cell* new_cell = machine_alloc_free_cell(context, 1);
+    new_cell->type = SECD_List;
+    new_cell->data.pair_value.head = value;
+    new_cell->data.pair_value.rest = pair;
+
+    return new_cell;
+}
+
+unsigned int pair_count(SECD_Cell* pair)
 {
     unsigned int result = 0;
 
-    for (SECD_Pair* tracker = pair; tracker->rest != 0; )
+    for (SECD_Cell* tracker = pair; pair != 0; )
     {
-	switch ( tracker->rest->type )
+	if ( tracker->type == SECD_List )
 	{
-	    case SECD_UInt:
-	    case SECD_SInt:
-	    case SECD_Floa:
-	    case SECD_Char:
-	    case SECD_Arra:
-	    case SECD_Inst:
-	    {
-		tracker = &((SECD_Pair) { .head = 0, .rest = 0 });
-	    }
-	    break;
-	    
-	    case SECD_List:
-	    {
-		tracker = pair_rest(tracker)->data.pair_value;
-	    }
-	    break;
+	    tracker = tracker->data.pair_value.rest;
 	}
+
+	else
+	{
+	    tracker = 0;
+	}
+
+	result++;
     }
 
     return result;

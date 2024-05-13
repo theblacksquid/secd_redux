@@ -7,9 +7,10 @@
 typedef struct SECD_Machine SECD_Machine;
 typedef struct SECD_Pair SECD_Pair;
 
-SECD_Cell pair_head(SECD_Cell* pair);
+SECD_Cell* pair_head(SECD_Cell* pair);
 SECD_Cell* pair_rest(SECD_Cell* pair);
 SECD_Cell* pair_cons(SECD_Cell* pair, SECD_Cell* value, SECD_Machine* context);
+SECD_Cell* pair_by_index(SECD_Cell* head, unsigned int index);
 unsigned int pair_count(SECD_Cell* pair);
 
 #endif

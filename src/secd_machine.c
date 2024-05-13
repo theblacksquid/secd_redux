@@ -36,7 +36,6 @@ void dump_machine(SECD_Machine* machine, Dump_Flags flag)
     if ( (result != 0) && (dump != 0) )
     {
 	result->next = machine->dump;
-	result->flags = flag;
 	
 	if ( flag & DUMP_FLAG_STACK )
 	{

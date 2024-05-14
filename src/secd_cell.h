@@ -60,11 +60,14 @@ struct SECD_Cell
 	    CON,
 	    EQL,
 	    LEQ,
+	    LTH,
+	    GTH,
 	    ADD,
 	    SUB,
 	    MUL,
 	    DIV,
 	    REM,
+	    IDX,
 	    STP,
 	} instruction;
     } data;

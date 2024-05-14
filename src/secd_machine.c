@@ -197,3 +197,37 @@ void machine_recursive_apply(SECD_Machine* machine)
     
     machine->control = pair_head(closure);    
 }
+
+void machine_pair_car(SECD_Machine* machine)
+{
+	SECD_Cell* from_stack = pop_stack(machine);
+	machine->stack = pair_cons(machine->stack, pair_head(from_stack), machine);
+}
+
+void machine_pair_cdr(SECD_Machine* machine)
+{
+	SECD_Cell* from_stack = pop_stack(machine);
+	machine->stack = pair_cons(machine->stack, pair_head(from_stack), machine);
+}
+
+void machine_atom(SECD_Machine *machine)
+{
+	SECD_Cell* to_test = pop_stack(machine);
+	SECD_Cell* result = machine_alloc_free_cell(machine, 1);
+
+	if ( (to_test->type == SECD_Arra) || (to_test->type == SECD_List) )
+		result->data.unsigned_int = 0;
+
+	else
+		result->data.unsigned_int = 1;
+
+	machine->stack = pair_cons(machine->stack, result, machine);
+}
+
+void machine_cons(SECD_Machine *machine)
+{
+	SECD_Cell* head = pop_stack(machine);
+	SECD_Cell* rest = pop_stack(machine);
+	SECD_Cell* pair = pair_cons(rest, head, machine);
+	machine->stack  = pair_cons(machine->stack, pair, machine);
+}

@@ -46,4 +46,17 @@ void machine_apply(SECD_Machine* machine);
 void machine_return(SECD_Machine* machine);
 void machine_dummy_env(SECD_Machine* machine);
 void machine_recursive_apply(SECD_Machine* machine);
+void machine_pair_car(SECD_Machine* machine);
+void machine_pair_cdr(SECD_Machine* machine);
+void machine_atom(SECD_Machine* machine);
+void machine_cons(SECD_Machine* machine);
+void machine_equal(SECD_Machine* machine);
+void machine_add(SECD_Machine* machine);
+void machine_subtract(SECD_Machine* machine);
+void machine_divide(SECD_Machine* machine);
+void machine_multiply(SECD_Machine* machine);
+void machine_remainder(SECD_Machine* machine);
+void machine_less_than_or_equal(SECD_Machine* machine);
+void machine_greater_then(SECD_Machine* machine);
+void machine_array_index(SECD_Machine* machine);
 #endif

@@ -114,15 +114,8 @@ void machine_load_value(SECD_Machine* machine)
     SECD_Cell* pair        = pair_head(machine->control);
     machine->control       = pair_rest(machine->control);
     int environment_index  = pair_head(pair)->data.unsigned_int;
-    int variable_index     = pair_rest(pair)->data.unsigned_int;
-    SECD_Cell* environment = pair_by_index(machine->environment, environment_index);
-    SECD_Cell* variable    = 0;
-
-    if ( environment != 0 )
-    {
-	variable = pair_by_index(environment, variable_index);
-	machine->stack = pair_cons(machine->stack, variable, machine);
-    }
+    SECD_Cell* variable    = pair_by_index(machine->environment, environment_index);
+    machine->stack         = pair_cons(machine->stack, variable, machine);
 }
 
 void machine_load_function(SECD_Machine* machine)

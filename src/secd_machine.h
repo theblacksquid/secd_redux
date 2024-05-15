@@ -13,9 +13,9 @@ typedef struct SECD_Machine_Dump SECD_Machine_Dump;
 
 typedef enum Dump_Flags
 {
-    DUMP_FLAG_STACK,
-    DUMP_FLAG_ENVIRONMENT,
-    DUMP_FLAG_CONTROL
+    DUMP_FLAG_STACK       = 2,
+    DUMP_FLAG_ENVIRONMENT = 4,
+    DUMP_FLAG_CONTROL     = 8
 } Dump_Flags;
 
 struct SECD_Machine
